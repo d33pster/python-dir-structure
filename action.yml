@@ -33,6 +33,12 @@ runs:
       env:
         action_path: ${{ github.action_path }}
     
+    - name: Configure Git
+       run: |
+         git config --global user.name 'github-actions[bot]'
+         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+       shell: bash
+    
     - name: Add Files
       run: git add .
       shell: bash
