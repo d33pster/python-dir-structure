@@ -12,7 +12,7 @@ runs:
     - name: Set Github Action path
       run: |
         echo "$GHA_PATH" >> $GITHUB_PATH
-        echo "GHA_PATH"
+        echo "$GHA_PATH"
       shell: bash
       env:
         GHA_PATH: ${{ github.action_path }}
