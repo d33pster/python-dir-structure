@@ -40,6 +40,9 @@ class Fix:
         if self.__rep__["src"] == "not_present":
             makedirs(join(self.directory, "src"))
             print(f"{_.GREEN}@Created{_.RESET} Dir - {_.BLUE}{join(self.directory, 'src')}{_.RESET}")
+            with open(join(self.directory, 'src', '__init__.py'), 'w+') as initfile:
+                initfile.write("# INIT")
+            print(f"{_.BLUE}@Added{_.RESET} {join(self.directory, 'src', '__init__.py')}")
             self.__change__ = True
         elif self.__rep__["src"] == "partial":
             print(f"{_.RED}@Already-Present!{_.RESET} {join(self.directory, 'src')} {_.BLUE}(FILE){_.RESET}")
@@ -47,6 +50,9 @@ class Fix:
             print(f"{_.BLUE}@Renamed{_.RESET} File - {join(self.directory, 'src')} {_.GREEN}{join(self.directory, 'src.file')}{_.RESET}")
             makedirs(join(self.directory, "src"))
             print(f"{_.GREEN}@Created{_.RESET} Dir - {_.BLUE}{join(self.directory, 'src')}{_.RESET}")
+            with open(join(self.directory, 'src', '__init__.py'), 'w+') as initfile:
+                initfile.write("# INIT")
+            print(f"{_.BLUE}@Added{_.RESET} {join(self.directory, 'src', '__init__.py')}")
             self.__change__ = True
         else:
             pass
@@ -55,6 +61,9 @@ class Fix:
         if self.__rep__["tests"] == "not_present":
             makedirs(join(self.directory, "tests"))
             print(f"{_.GREEN}@Created{_.RESET} Dir - {_.BLUE}{join(self.directory, 'tests')}{_.RESET}")
+            with open(join(self.directory, 'tests', 'test1.py'), 'w+') as initfile:
+                initfile.write("#!/usr/bin/env python3")
+            print(f"{_.BLUE}@Added{_.RESET} {join(self.directory, 'tests', 'test1.py')}")
             self.__change__ = True
         elif self.__rep__["tests"] == "partial":
             print(f"{_.RED}@Already-Present!{_.RESET} {join(self.directory, 'tests')} {_.BLUE}(FILE){_.RESET}")
@@ -62,6 +71,9 @@ class Fix:
             print(f"{_.BLUE}@Renamed{_.RESET} File - {join(self.directory, 'tests')} {_.GREEN}{join(self.directory, 'tests.file')}{_.RESET}")
             makedirs(join(self.directory, "tests"))
             print(f"{_.GREEN}@Created{_.RESET} Dir - {_.BLUE}{join(self.directory, 'tests')}{_.RESET}")
+            with open(join(self.directory, 'tests', 'test1.py'), 'w+') as initfile:
+                initfile.write("#!/usr/bin/env python3")
+            print(f"{_.BLUE}@Added{_.RESET} {join(self.directory, 'tests', 'test1.py')}")
             self.__change__ = True
         else:
             pass
@@ -86,12 +98,6 @@ class Fix:
             self.__change__ = True
         else:
             pass
-
-        with open(".inter", "w+") as interfile:
-            if self.__change__:
-                interfile.write("True")
-            else:
-                interfile.write("False")
             
 
 if __name__ == "__main__":
