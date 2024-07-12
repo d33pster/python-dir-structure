@@ -50,5 +50,5 @@ runs:
     - name: Sync
       run: git push
       shell: bash
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_API_TOKEN }}
+      # env:
+      #   GITHUB_TOKEN: ${{ secrets.GH_API_TOKEN }}
