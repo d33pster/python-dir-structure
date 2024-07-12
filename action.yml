@@ -9,15 +9,16 @@ runs:
       with:
         python-version: "3.12"
     
-    - name: Set Github Action path
-      run: |
-        echo "$GHA_PATH" >> $GITHUB_PATH
-        echo "$GHA_PATH"
-      shell: bash
-      env:
-        GHA_PATH: ${{ github.action_path }}
+    # - name: Set Github Action path
+    #   run: |
+    #     echo "$GHA_PATH" >> $GITHUB_PATH
+    #     echo "$GHA_PATH"
+    #   shell: bash
+    #   env:
+    #     GHA_PATH: ${{ github.action_path }}
 
     - name: Check structure and Generate metadata
-      run: python check_structure.py
+      run: python $AP/check_structure.py
       shell: bash
-
+      env:
+        AP: ${{ github.action_path }}
