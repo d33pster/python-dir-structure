@@ -29,8 +29,26 @@ runs:
       env:
         action_path: ${{ github.action_path }}
     
-    - name: Sync
-      run: python $action_path/sync.py
+    - name: Configure Git
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+      shell: bash
+    
+    - name: Add Files
+      run: git add .
+      shell: bash
+    
+    - name: Commit Changes
+      run: |
+        ppsversion=$(<$action_path/version)
+        git commit -m "STRUCTURE UPDATE (pps@v$ppsversion)"
       shell: bash
       env:
-        action_path: ${{ github.action_path }}    
+        action_path: ${{ github.action_path }}
+
+    - name: Sync
+      run: git push
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_API_TOKEN }}
