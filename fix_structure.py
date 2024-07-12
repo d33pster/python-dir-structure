@@ -67,14 +67,14 @@ class Fix:
             pass
         
         # fix toml
-        if self.__rep__["TOML"] == "not_present":
+        if self.__rep__["toml"] == "not_present":
             with open("pyproject.toml", "w+") as toml:
                 toml.write("[build-system]\nrequires = [\"setuptools>=61.0\"]\nbuild-backend = \"setuptools.build_meta\"\n\n")
                 toml.write(f"[project]\nname = \"{basename(self.directory)}\"\nversion = \"0.1\"\n\n")
                 toml.write(f"[project.urls]\nGitHub = \"{popen('git remote get-url origin').read().replace('\n', '')}\"")
             print(f"{_.GREEN}@Created{_.RESET} {join(self.directory, 'pyproject.toml')}")
             self.__change__ = True
-        elif self.__rep__['TOML'] == "partial":
+        elif self.__rep__['toml'] == "partial":
             print(f"{_.RED}@Already-Present!{_.RESET} {join(self.directory, 'pyproject.toml')} {_.BLUE}(DIR){_.RESET}")
             rename(join(self.directory, "pyproject.toml"), join(self.directory, "pyproject.toml.dir"))
             print(f"{_.BLUE}@Renamed{_.RESET} Dir - {join(self.directory, 'pyproject.toml')} {_.GREEN}{join(self.directory, 'pyproject.toml.dir')}{_.RESET}")
