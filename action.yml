@@ -1,5 +1,9 @@
 name: CCDS
 description: Check and correct directory structure
+inputs:
+  GH_API_TOKEN:
+    description: "GitHub Personal Access Token"
+    required: True
 runs:
   using: "composite"
   steps:
@@ -50,5 +54,5 @@ runs:
     - name: Sync
       run: git push
       shell: bash
-      # env:
-      #   GITHUB_TOKEN: ${{ secrets.GH_API_TOKEN }}
+      env:
+        GITHUB_TOKEN: ${{ inputs.GH_API_TOKEN }}
