@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from os import getcwd, makedirs, rename, unlink, popen
-from os.path import join, basename
+from os.path import join, basename, dirname
 from colorama import init as color, Fore as _
 
 class Fix:
@@ -98,6 +98,18 @@ class Fix:
             self.__change__ = True
         else:
             pass
+        
+        link = popen('git remote get-url origin').read().replace('\n', '')
+        link = link.split(".git")[0]
+        repo = basename(link)
+        link = dirname(link)
+        username = basename(link)
+        
+        with open('.username', 'w+') as unamefile:
+            unamefile.write(username)
+        
+        with open('.repo', 'w+') as repofile:
+            repofile.write(repo)
             
 
 if __name__ == "__main__":

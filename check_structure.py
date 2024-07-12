@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from os import listdir, getcwd
-from os.path import join, isdir, isfile, basename
+from os.path import join, isdir, isfile
 
 class Check:
     def __init__(self):
