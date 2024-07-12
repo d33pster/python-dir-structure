@@ -99,17 +99,17 @@ class Fix:
         else:
             pass
         
-        link = popen('git remote get-url origin').read().replace('\n', '')
-        link = link.split(".git")[0]
-        repo = basename(link)
-        link = dirname(link)
-        username = basename(link)
+        # link = popen('git remote get-url origin').read().replace('\n', '')
+        # link = link.split(".git")[0]
+        # repo = basename(link)
+        # link = dirname(link)
+        # username = basename(link)
         
-        with open('.username', 'w+') as unamefile:
-            unamefile.write(username)
+        # with open('.username', 'w+') as unamefile:
+        #     unamefile.write(username)
         
-        with open('.repo', 'w+') as repofile:
-            repofile.write(repo)
+        # with open('.repo', 'w+') as repofile:
+        #     repofile.write(repo)
             
 
 if __name__ == "__main__":

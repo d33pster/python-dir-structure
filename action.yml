@@ -4,6 +4,12 @@ inputs:
   GH_API_TOKEN:
     description: "GitHub Personal Access Token"
     required: True
+  username:
+    description: "User push email"
+    required: True
+  email:
+    description: "user email"
+    required: True
 runs:
   using: "composite"
   steps:
@@ -35,9 +41,12 @@ runs:
     
     - name: Configure Git
       run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git config --global user.name "$pps_u"
+        git config --global user.email "$pps_e"
       shell: bash
+      env:
+        pps_u: ${{ inputs.username }}
+        pps_e: ${{ inputs.email }}
     
     - name: Add Files
       run: git add .
@@ -52,8 +61,12 @@ runs:
         action_path: ${{ github.action_path }}
 
     - name: Sync
-      run: python $action_path/sync.py
+      run: |
+        repo=$(basename "$PWD")
+        git push "https://$pps_u:$GITHUB_TOKEN@github.com/$pps_u/$repo.git"
       shell: bash
       env:
         action_path: ${{ github.action_path }}
         GITHUB_TOKEN: ${{ inputs.GH_API_TOKEN }}
+        pps_u: ${{ inputs.username }}
+        pps_e: ${{ inputs.email }}
