@@ -17,4 +17,5 @@ runs:
 
     - name: Check structure and Generate metadata
       run: python check_structure.py
+      shell: bash
 
