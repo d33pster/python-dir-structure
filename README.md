@@ -29,7 +29,7 @@
     push:
         branches: ["main"]
   
-  permissions: write-all
+  permissions: write-all # or commits read and write permissions.
 
   jobs:
     structure:
