@@ -3,7 +3,8 @@ description: Check and correct directory structure for PYPI
 inputs:
   GH_API_TOKEN:
     description: "GitHub Personal Access Token"
-    required: True
+    required: False
+    default: $ {{ github.token }}
 runs:
   using: "composite"
   steps:
