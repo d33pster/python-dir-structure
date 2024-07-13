@@ -6,7 +6,7 @@
 
 ## README
 
-* Before you can use this, go to `Repository Setting > Actions > General` and allow Read and Write Permissions.
+* **[OPTIONAL]** Before you can use this, go to `Repository Setting > Actions > General` and allow Read and Write Permissions.
 
   ![Read and Write Permission Image](assets/perms.png)
 
