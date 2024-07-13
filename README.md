@@ -12,7 +12,7 @@
 
   and hit save.
 
-* After altering the setting, Create a `Personal Access Token` with `repo` access. To create one, head to `Settings (GitHub settings) > Developer Settings > Personal Access Token > Tokens (classic) > Generate New Token > Generate New Token (classic)` and choose a name, expiration data and tick `repo` and hit create.
+* **[OPTIONAL]** After altering the setting, Create a `Personal Access Token` with `repo` access. To create one, head to `Settings (GitHub settings) > Developer Settings > Personal Access Token > Tokens (classic) > Generate New Token > Generate New Token (classic)` and choose a name, expiration data and tick `repo` and hit create.
 
   Copy this token and save it in a safe place. Also, head to `Repository Settings > secrets and variables > Actions > New Repository Secret` and choose a name of your choice, say, `GITHUB_TOKEN` and paste the token in the area provided and hit save.
 
@@ -28,6 +28,8 @@
   on:
     push:
         branches: ["main"]
+  
+  permissions: write-all
 
   jobs:
     structure:
@@ -36,7 +38,7 @@
         steps:
         - uses: d33pster/python-project-structure@v3
           with:
-            GH_API_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+            GH_API_TOKEN: ${{ secrets.GITHUB_TOKEN }} # optional
             # you can change this to any name you chose earlier.
             # don't change GH_API_TOKEN. Leave it as it is.
   ```
