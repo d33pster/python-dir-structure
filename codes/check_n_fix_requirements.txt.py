@@ -8,6 +8,7 @@ class Requirements:
     def __init__(self):
         self.directory = getcwd()
         self.files = listdir(self.directory)
+        self.check = False
         for file in self.files:
             if file.lower() == "requirements.txt" or file.lower() == "requirements":
                 self.check = True
