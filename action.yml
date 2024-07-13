@@ -4,12 +4,6 @@ inputs:
   GH_API_TOKEN:
     description: "GitHub Personal Access Token"
     required: True
-  username:
-    description: "User push email"
-    required: True
-  email:
-    description: "user email"
-    required: True
 runs:
   using: "composite"
   steps:
@@ -28,25 +22,28 @@ runs:
         action_path: ${{ github.action_path }}
 
     - name: Check structure and Generate metadata
-      run: python $action_path/check_structure.py
+      run: python $action_path/codes/check_structure.py
       shell: bash
       env:
         action_path: ${{ github.action_path }}
     
     - name: Fix structure
-      run: python $action_path/fix_structure.py
+      run: python $action_path/codes/fix_structure.py
+      shell: bash
+      env:
+        action_path: ${{ github.action_path }}
+    
+    - name: Transfer Dependencies if any.
+      run: python $action_path/codes/check_n_fix_requirements.txt.py
       shell: bash
       env:
         action_path: ${{ github.action_path }}
     
     - name: Configure Git
       run: |
-        git config --global user.name "$pps_u"
-        git config --global user.email "$pps_e"
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
       shell: bash
-      env:
-        pps_u: ${{ inputs.username }}
-        pps_e: ${{ inputs.email }}
     
     - name: Add Files
       run: git add .
@@ -55,18 +52,15 @@ runs:
     - name: Commit Changes
       run: |
         ppsversion=$(<$action_path/version)
-        git commit -m "STRUCTURE UPDATE (pps@v$ppsversion)"
+        git commit -m "Structure Update (pps@v$ppsversion)"
       shell: bash
       env:
         action_path: ${{ github.action_path }}
 
     - name: Sync
       run: |
-        repo=$(basename "$PWD")
-        git push "https://$pps_u:$GITHUB_TOKEN@github.com/$pps_u/$repo.git"
+        git push 
       shell: bash
       env:
-        action_path: ${{ github.action_path }}
+        # action_path: ${{ github.action_path }}
         GITHUB_TOKEN: ${{ inputs.GH_API_TOKEN }}
-        pps_u: ${{ inputs.username }}
-        pps_e: ${{ inputs.email }}
