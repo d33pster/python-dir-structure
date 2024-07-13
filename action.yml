@@ -1,5 +1,5 @@
-name: CCDS
-description: Check and correct directory structure
+name: python-project-structure
+description: Check and correct directory structure for PYPI
 inputs:
   GH_API_TOKEN:
     description: "GitHub Personal Access Token"
@@ -64,3 +64,6 @@ runs:
       env:
         # action_path: ${{ github.action_path }}
         GITHUB_TOKEN: ${{ inputs.GH_API_TOKEN }}
+branding:
+  icon: box
+  color: black
