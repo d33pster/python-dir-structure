@@ -13,7 +13,7 @@ class Sync:
         path = getcwd()
         repo = Repo(path)
 
-        if repo.is_dirty():
+        if repo.is_dirty(untracked_files=True):
             repo.index.add('*')
             with open(join(environ['action_path'], "version"), "r+") as versionfile:
                 version = versionfile.read().replace("\n", "")
