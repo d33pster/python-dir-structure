@@ -46,24 +46,11 @@ runs:
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
       shell: bash
     
-    - name: Add Files
-      run: git add .
-      shell: bash
-    
-    - name: Commit Changes
-      run: |
-        ppsversion=$(<$action_path/version)
-        git commit -m "Structure Update (pps@v$ppsversion)"
+    - name: Sync
+      run: python $action_path/codes/sync.py
       shell: bash
       env:
         action_path: ${{ github.action_path }}
-
-    - name: Sync
-      run: |
-        git push 
-      shell: bash
-      env:
-        # action_path: ${{ github.action_path }}
         GITHUB_TOKEN: ${{ inputs.GH_API_TOKEN }}
 branding:
   icon: box
